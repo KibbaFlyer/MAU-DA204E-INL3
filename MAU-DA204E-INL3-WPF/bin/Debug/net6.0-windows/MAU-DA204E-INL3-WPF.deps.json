@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "MAU-DA204E-INL3-WPF/1.0.0": {
+        "runtime": {
+          "MAU-DA204E-INL3-WPF.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MAU-DA204E-INL3-WPF/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

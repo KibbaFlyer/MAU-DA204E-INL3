@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MAU_DA304E_INL3.ViewModels;
+using MAU_DA304E_INL3.ViewModel;
 
 namespace MAU_DA304E_INL3
 {
@@ -23,6 +23,7 @@ namespace MAU_DA304E_INL3
     {
         public MainWindow()
         {
+            /// Setting the DataContext, I have chosen a MVVM workflow since as I have understood it, it is very popular
             DataContext = new BmiCalculationViewModel();
             InitializeComponent();
         }

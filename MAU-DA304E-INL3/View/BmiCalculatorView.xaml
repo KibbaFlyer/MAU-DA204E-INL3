@@ -1,0 +1,198 @@
+﻿<UserControl x:Class="MAU_DA304E_INL3.View.BmiCalculatorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MAU_DA304E_INL3.View" 
+             xmlns:viewmodel="clr-namespace:MAU_DA304E_INL3.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:BmiCalculationViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" 
+             d:DesignWidth="800"
+             >
+    <Grid Background="#FFEAEAEA" Width="Auto" Height="Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Your Name" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Height" Name="lblHeight" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label  Grid.Row="2" Grid.Column="0" Content="Weight" Name="lblWeight" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+            <TextBox  Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" MinWidth="50" Text="{Binding Path=Height, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="ft" x:Name="lblft" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Margin="0 0 20 0" Visibility="{Binding VisibleImperial}"/>
+            <TextBox Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" MinWidth="50" Text="{Binding Path=HeightInches, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding VisibleImperial}"/>
+            <Label Grid.Row="1" Grid.Column="2" Content="in" x:Name="lblin" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Visibility="{Binding VisibleImperial}"/>
+        </StackPanel>
+        <TextBox  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0 0 5 0" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" Width="Auto" MinWidth="50" Text="{Binding Path=Weight, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <GroupBox Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" HorizontalAlignment="Right" Height="Auto" Margin="0 0 5 0" Header="Unit" VerticalAlignment="Top" Width="Auto" BorderBrush="#FF9E9E9E" Background="White">
+            <StackPanel>
+                <RadioButton Name="rbtnMetric" Content="Metric Unit (kg, m/cm)" HorizontalAlignment="Left" Margin="0 10 0 0" Height="Auto" Command="{Binding ToggleMetricUnit}" IsChecked="true"/>
+                <RadioButton Name="rbtnImperial" Content="Imperial Unit (lbs, feet/inches)" HorizontalAlignment="Left" Margin="0 10 0 10" Height="Auto" Command="{Binding ToggleImperialUnit}" />
+            </StackPanel>
+
+        </GroupBox>
+        <Grid Grid.Column="3" Grid.RowSpan="5" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Saving plan">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Initial deposit"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" MinWidth="100" Text="{Binding InitialDeposit}"/>
+
+                    <Label  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Monthly depoit"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" MinWidth="100" Text="{Binding MonthlyDeposit}"/>
+
+                    <Label  Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Period (years)"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" MinWidth="100" Text="{Binding PeriodYears}"/>
+
+                    <Label  Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Growth (or interest) in %"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" MinWidth="100" Text="{Binding Interest}"/>
+
+                    <Label  Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Fees in %"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" MinWidth="100" Text="{Binding Fees}"/>
+                </Grid>
+
+            </GroupBox>
+            <Button Grid.ColumnSpan="1" Grid.Row="1" Margin="20" Command="{Binding CalculateSaving}">Calculate saving</Button>
+            <GroupBox Header="Future value" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="2">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Amount paid"/>
+                    <Border Grid.Row="0" Grid.Column="1" Margin="5">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="1" Direction="135"></DropShadowEffect>
+                        </Border.Effect>
+                        <Label Height="25" HorizontalAlignment="Right" MinWidth="100"  VerticalAlignment="Center" BorderBrush="LightSlateGray" BorderThickness="1" Background="LightGray" Content="{Binding AmountPaid}"/>
+                    </Border>
+
+                    <Label  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Amount earned"/>
+                    <Border Grid.Row="1" Grid.Column="1" Margin="5">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="1" Direction="135"></DropShadowEffect>
+                        </Border.Effect>
+                        <Label Height="25" HorizontalAlignment="Right" MinWidth="100" VerticalAlignment="Center" BorderBrush="LightSlateGray" BorderThickness="1" Background="LightGray" Content="{Binding AmountEarned}"/>
+                    </Border>
+
+                    <Label  Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Final balance"/>
+                    <Border Grid.Row="2" Grid.Column="1" Margin="5">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="1" Direction="135"></DropShadowEffect>
+                        </Border.Effect>
+                        <Label Height="25" HorizontalAlignment="Right" MinWidth="100" VerticalAlignment="Center" BorderBrush="LightSlateGray" BorderThickness="1" Background="LightGray" Content="{Binding FinalBalance}"/>
+                    </Border>
+
+                    <Label  Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Total fees"/>
+                    <Border Grid.Row="3" Grid.Column="1" Margin="5">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="2" BlurRadius="1" Direction="135"></DropShadowEffect>
+                        </Border.Effect>
+                        <Label Height="25" HorizontalAlignment="Right" MinWidth="100" VerticalAlignment="Center" BorderBrush="LightSlateGray" BorderThickness="1" Background="LightGray" Content="{Binding TotalFees}"/>
+                    </Border>
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+        <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Name="btnCalculate" Content="Calculate" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="Auto" MinWidth="100" Margin="0 20 0 0" Command="{Binding CalculateBmi}"/>
+        
+        <GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" MinHeight="161"  Height="Auto" Header="Results" VerticalAlignment="Center" Width="Auto" BorderBrush="#FF9E9E9E" Background="White">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="1">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="2" BlurRadius="1" Direction="135"></DropShadowEffect>
+                    </Border.Effect>
+                    <Label Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" Width="Auto" MinWidth="50" BorderBrush="LightSlateGray" BorderThickness="1" Background="LightGray" Content="{Binding Bmi}"/>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="2" BlurRadius="1" Direction="135"></DropShadowEffect>
+                    </Border.Effect>
+                    <Label Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderBrush="LightSlateGray" BorderThickness="1" Background="LightGray" Content="{Binding WeightCategory}"/>
+                </Border>
+                <Label Grid.Row="0" Grid.Column="0" Content="Your BMI" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Weight Category" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Grid.Row="2" Grid.Column="1" Content="Normal BMI is between 18.50 and 24.9" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Foreground="#FF2DA949" Content="{Binding NormalWeight}"/>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" Header="BMR Calculator" Margin="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <GroupBox Header="Gender" Grid.Row="0" Grid.Column="0" Margin="10">
+                    <StackPanel Margin="0 0 0 10">
+                        <RadioButton Name="rbtnFemale" Content="Female" HorizontalAlignment="Left" Margin="0 10 0 0" Height="Auto" Command="{Binding ToggleGenderButton}" IsChecked="true"/>
+                        <RadioButton Name="rbtnMale" Content="Male" HorizontalAlignment="Left" Margin="0 10 0 0" Height="Auto" Command="{Binding ToggleGenderButton}"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Weekly activity level" Grid.Row="0" Grid.Column="1" Margin="10">
+                    <StackPanel Margin="0 0 0 10">
+                        <RadioButton Name="rbtnWeeklyActivitySedentary" Content="Sedentary (little of no exercise)" HorizontalAlignment="Left" Margin="0 10 0 0" Height="Auto" Command="{Binding ToggleWeeklyActivity}" IsChecked="true" CommandParameter="Sedentary"/>
+                        <RadioButton Name="rbtnWeeklyActivityLightly" Content="Lightly active (1 to 3times)" HorizontalAlignment="Left" Margin="0 10 0 0" Height="Auto" Command="{Binding ToggleWeeklyActivity}" CommandParameter="Lightly active"/>
+                        <RadioButton Name="rbtnWeeklyActivityModerately" Content="Moderately active (3 to 5 times)" HorizontalAlignment="Left" Margin="0 10 0 0" Height="Auto" Command="{Binding ToggleWeeklyActivity}" CommandParameter="Moderately active"/>
+                        <RadioButton Name="rbtnWeeklyActivityVery" Content="Very active (6 to 7 times)" HorizontalAlignment="Left" Margin="0 10 0 0" Height="Auto" Command="{Binding ToggleWeeklyActivity}" CommandParameter="Very active"/>
+                        <RadioButton Name="rbtnWeeklyActivityExtra" Content="Extra active, hard exercises or job" HorizontalAlignment="Left" Margin="0 10 0 0" Height="Auto" Command="{Binding ToggleWeeklyActivity}" CommandParameter="Extra active"/>
+                    </StackPanel>
+                </GroupBox>
+                <Label Grid.Row="0" Grid.Column="2"  Margin="10" Content="{Binding BmrResults}" Background="White"/>
+                <Label Grid.Row="2" Grid.Column="1" Content="Age" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25 0 0 0"/>
+                <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Height="30" Text="{Binding Age}"/>
+                <Button Grid.Row="2" Height="25" Margin="10" Content="Calculate BMR" Command="{Binding CalculateBmr}"/>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</UserControl>

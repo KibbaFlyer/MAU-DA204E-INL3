@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "MAU-DA304E-INL3-MVVM/1.0.0": {
+        "runtime": {
+          "MAU-DA304E-INL3-MVVM.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MAU-DA304E-INL3-MVVM/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

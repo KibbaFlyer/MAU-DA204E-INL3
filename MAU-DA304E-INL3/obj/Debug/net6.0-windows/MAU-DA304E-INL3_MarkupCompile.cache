@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 \\Mac\Home\Documents\GitHub\MAU-DA204E-INL3\MAU-DA304E-INL3\App.xaml
-21459169040
+21647172698
 
-8-569297112
+12-659032548
 194183970531
-MainWindow.xaml;Views\BmiCalculatorView.xaml;
+MainWindow.xaml;View\BmiCalculatorView.xaml;
 
 False
 
